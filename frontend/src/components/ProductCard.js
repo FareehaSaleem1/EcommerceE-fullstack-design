@@ -1,14 +1,14 @@
-// frontend/src/components/ProductCard.js
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
-  // Use the database's _id for the link
+  
   const productId = product._id; 
 
   return (
     <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white">
-      {/* The Link now correctly uses the product's _id */}
+      
       <Link to={`/product/${productId}`}>
         <img 
           src={product.image} 

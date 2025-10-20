@@ -1,17 +1,18 @@
-// backend/index.js
-const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const connectDB = require('./config/db');
-const productRoutes = require('./routes/productRoutes');
-const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import connectDB from './config/db.js';
+import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import chatRoutes from './routes/chatRoutes.js'; 
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
 connectDB();
 
 const app = express();
-
-app.use(cors()); // Enable CORS for all routes
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -19,8 +20,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/chat', chatRoutes); 
 
-// Error handling middleware should be last
 app.use(notFound);
 app.use(errorHandler);
 

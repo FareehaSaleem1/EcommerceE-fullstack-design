@@ -1,4 +1,4 @@
-// frontend/src/mockData.js
+
 export const products = [
   { id: 1, name: 'Wireless Headphones', price: 99.50, image: 'https://via.placeholder.com/300' },
   { id: 2, name: 'Smartphone Pro X', price: 899.00, image: 'https://via.placeholder.com/300' },

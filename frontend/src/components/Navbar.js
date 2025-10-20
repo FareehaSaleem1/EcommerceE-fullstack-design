@@ -1,19 +1,26 @@
-// frontend/src/components/Navbar.js
-import React, { useState } from 'react';
+
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
   const [keyword, setKeyword] = useState('');
+  const { userInfo, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault(); // Prevent the form from reloading the page
+    e.preventDefault();
     if (keyword.trim()) {
       navigate(`/products?q=${keyword}`);
-      setKeyword(''); // Clear input after search
+      setKeyword('');
     } else {
       navigate('/products');
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
   };
 
   return (
@@ -25,7 +32,6 @@ const Navbar = () => {
               BKR Store
             </Link>
           </div>
-
           <form onSubmit={handleSearchSubmit} className="hidden md:block">
             <div className="relative">
               <input
@@ -38,27 +44,32 @@ const Navbar = () => {
               />
             </div>
           </form>
-
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              <Link
-                to="/"
-                className="text-gray-700 hover:bg-gray-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Home
-              </Link>
-              <Link
-                to="/products"
-                className="text-gray-700 hover:bg-gray-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-              >
+            <div className="ml-10 flex items-center space-x-4">
+              
+              <Link to="/products" className="text-gray-700 hover:bg-gray-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium">
                 All Products
               </Link>
-              <Link
-                to="/cart"
-                className="text-gray-700 hover:bg-gray-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium"
-              >
+              <Link to="/cart" className="text-gray-700 hover:bg-gray-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium">
                 Cart
               </Link>
+              {userInfo && userInfo.isAdmin && (
+                <Link to="/admin/dashboard" className="text-gray-700 hover:bg-gray-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium">
+                  Dashboard
+                </Link>
+              )}
+              {userInfo ? (
+                <div className="flex items-center">
+                  <span className="text-gray-700 font-medium">{userInfo.name}</span>
+                  <button onClick={handleLogout} className="ml-4 text-gray-700 hover:bg-gray-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium">
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <Link to="/login" className="text-gray-700 hover:bg-gray-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium">
+                  Sign In
+                </Link>
+              )}
             </div>
           </div>
         </div>

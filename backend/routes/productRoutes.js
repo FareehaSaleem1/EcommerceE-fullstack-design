@@ -1,20 +1,22 @@
-// backend/routes/productRoutes.js
-const express = require('express');
-const router = express.Router();
 
-// We will create these controller functions in the next step
-const {
+import express from 'express';
+const router = express.Router();
+import {
   getProducts,
   getProductById,
   createProduct,
   updateProduct,
   deleteProduct,
-} = require('../controllers/productController'); // This file doesn't exist yet
+} from '../controllers/productController.js';
+import { protect, admin } from '../middleware/authMiddleware.js';
 
-// Route for getting all products and creating a new product
-router.route('/').get(getProducts).post(createProduct);
+// Public routes
+router.route('/').get(getProducts);
+router.route('/:id').get(getProductById);
 
-// Route for getting, updating, and deleting a single product by its ID
-router.route('/:id').get(getProductById).put(updateProduct).delete(deleteProduct);
+// Admin-only routes
+router.route('/').post(protect, admin, createProduct);
+router.route('/:id').put(protect, admin, updateProduct);
+router.route('/:id').delete(protect, admin, deleteProduct);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-// frontend/src/pages/HomePage.js
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -12,7 +12,7 @@ const HomePage = () => {
     const fetchFeaturedProducts = async () => {
       try {
         const { data } = await axios.get('http://localhost:5000/api/products');
-        // Get the first 6 products from the response
+        
         setFeaturedProducts(data.slice(0, 6));
         setLoading(false);
       } catch (error) {
@@ -26,7 +26,7 @@ const HomePage = () => {
 
   return (
     <div>
-      {/* Hero Section */}
+      
       <section className="bg-blue-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
@@ -46,7 +46,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Featured Products Section */}
+      
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">

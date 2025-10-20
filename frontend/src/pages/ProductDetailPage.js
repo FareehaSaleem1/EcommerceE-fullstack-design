@@ -1,15 +1,15 @@
-// frontend/src/pages/ProductDetailPage.js
-import React, { useState, useEffect, useContext } from 'react'; // Import useContext
+
+import React, { useState, useEffect, useContext } from 'react'; 
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import { CartContext } from '../context/CartContext'; // Import CartContext
+import { CartContext } from '../context/CartContext'; 
 
 const ProductDetailPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const { addToCart } = useContext(CartContext); // Get the addToCart function
+  const { addToCart } = useContext(CartContext); 
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -64,7 +64,7 @@ const ProductDetailPage = () => {
             </div>
             <div>
               <button
-                onClick={handleAddToCart} // Add onClick handler
+                onClick={handleAddToCart} 
                 className="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
                 Add to Cart
               </button>

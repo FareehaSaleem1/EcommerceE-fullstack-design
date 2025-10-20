@@ -1,4 +1,4 @@
-// frontend/src/pages/ProductListPage.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
@@ -26,7 +26,7 @@ const ProductListPage = () => {
     };
 
     fetchProducts();
-  }, [keyword]); // Re-run the effect if the keyword changes
+  }, [keyword]); 
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
